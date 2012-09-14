@@ -69,14 +69,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 367585537;
-			PBXWorkspaceStateSaveDate = 367585537;
+			PBXPerProjectTemplateStateSaveDate = 369310435;
+			PBXWorkspaceStateSaveDate = 369310435;
 		};
 		perUserProjectItems = {
-			D1607F1815E8E99A00432DBF /* XCBuildMessageTextBookmark */ = D1607F1815E8E99A00432DBF /* XCBuildMessageTextBookmark */;
-			D1607F2115E8E9E900432DBF /* XCBuildMessageTextBookmark */ = D1607F2115E8E9E900432DBF /* XCBuildMessageTextBookmark */;
-			D1607F2215E8E9E900432DBF /* PBXTextBookmark */ = D1607F2215E8E9E900432DBF /* PBXTextBookmark */;
-			D1607F2315E8E9E900432DBF /* PBXTextBookmark */ = D1607F2315E8E9E900432DBF /* PBXTextBookmark */;
+			D14B26E21603399100779D4A /* PBXTextBookmark */ = D14B26E21603399100779D4A /* PBXTextBookmark */;
+			D14B26E31603399100779D4A /* PBXTextBookmark */ = D14B26E31603399100779D4A /* PBXTextBookmark */;
+			D1C9FAE616033AF200594635 /* PBXTextBookmark */ = D1C9FAE616033AF200594635 /* PBXTextBookmark */;
+			D1C9FAE916033AF200594635 /* PBXTextBookmark */ = D1C9FAE916033AF200594635 /* PBXTextBookmark */;
 			D1F0454F15E8DEBF00B418EF /* PBXTextBookmark */ = D1F0454F15E8DEBF00B418EF /* PBXTextBookmark */;
 		};
 		sourceControlManager = D1F0452E15E8DE2300B418EF /* Source Control */;
@@ -93,7 +93,7 @@
 	};
 	18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1321, 9646}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1321, 9750}}";
 			sepNavSelRange = "{13663, 0}";
 			sepNavVisRange = "{12013, 1768}";
 			sepNavWindowFrame = "{{177, 30}, {1064, 807}}";
@@ -107,35 +107,37 @@
 			sepNavWindowFrame = "{{75, 142}, {1236, 710}}";
 		};
 	};
-	D1607F1815E8E99A00432DBF /* XCBuildMessageTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "'PDFAnnotation' may not respond to '-name'";
-		fRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */;
-		fallbackIsa = XCBuildMessageTextBookmark;
-		rLen = 0;
-		rLoc = 458;
-		rType = 1;
-	};
-	D1607F2115E8E9E900432DBF /* XCBuildMessageTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "'PDFAnnotation' may not respond to '-name'";
-		fRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */;
-		fallbackIsa = XCBuildMessageTextBookmark;
-		rLen = 0;
-		rLoc = 458;
-		rType = 1;
-	};
-	D1607F2215E8E9E900432DBF /* PBXTextBookmark */ = {
+	D14B26E21603399100779D4A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */;
 		name = "4DPlugin.cpp: 459";
 		rLen = 0;
 		rLoc = 12181;
 		rType = 0;
-		vrLen = 803;
-		vrLoc = 12061;
+		vrLen = 794;
+		vrLoc = 12070;
 	};
-	D1607F2315E8E9E900432DBF /* PBXTextBookmark */ = {
+	D14B26E31603399100779D4A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */;
+		name = "4DPlugin.cpp: 492";
+		rLen = 0;
+		rLoc = 13663;
+		rType = 0;
+		vrLen = 1768;
+		vrLoc = 12013;
+	};
+	D1C9FAE616033AF200594635 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */;
+		name = "4DPlugin.cpp: 459";
+		rLen = 0;
+		rLoc = 12181;
+		rType = 0;
+		vrLen = 742;
+		vrLoc = 12122;
+	};
+	D1C9FAE916033AF200594635 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 18B684FE06944F8800CC6A1E /* 4DPlugin.cpp */;
 		name = "4DPlugin.cpp: 492";

@@ -210,6 +210,11 @@ void CPicture::toParamAtIndex(PackagePtr pParams, uint32_t index)
 				PA_DisposePicture(*p);
 				*p = PA_DuplicatePicture(this->_CPicture, 1);//1=retain			
 			}
+		}else{
+			
+			//happens in compiled mode
+			*p = PA_DuplicatePicture(this->_CPicture, 1);//1=retain	
+			
 		}
 	}	
 }
