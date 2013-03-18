@@ -263,7 +263,7 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 42D60B430A9DDBC8002ABB42 /* Build configuration list for PBXProject "4D Plugin" */;
+			buildConfigurationList = 42D60B430A9DDBC8002ABB42 /* Build configuration list for PBXProject "PDF Kit" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -465,15 +465,13 @@
 		42D60B450A9DDBC8002ABB42 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					ppc,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				GCC_VERSION = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				SYMROOT = "$(SRCROOT)/PDF Kit.4dbase/Plugins";
@@ -509,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
 		};
-		42D60B430A9DDBC8002ABB42 /* Build configuration list for PBXProject "4D Plugin" */ = {
+		42D60B430A9DDBC8002ABB42 /* Build configuration list for PBXProject "PDF Kit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42D60B440A9DDBC8002ABB42 /* Development */,
