@@ -197,48 +197,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>D1F50A1016D768A60041129F</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>4DPlugin.cpp</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>D1F50A1116D768A60041129F</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>4DPlugin.cpp</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>D164183816F742F300377EA3</string>
-						<key>history</key>
-						<array>
-							<string>D1F50A1D16D768F40041129F</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {728, 687}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>712 150 728 728 0 0 1440 878 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -367,11 +326,11 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D164183516F742F300377EA3</string>
+										<string>D1077C7718434AD8004ABB92</string>
 										<key>history</key>
 										<array>
 											<string>D1F0454F15E8DEBF00B418EF</string>
-											<string>D1F50A1C16D768F40041129F</string>
+											<string>D164183516F742F300377EA3</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -383,14 +342,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {580, 149}}</string>
+								<string>{{0, 0}, {580, 135}}</string>
 								<key>RubberWindowFrame</key>
 								<string>262 260 788 504 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>149pt</string>
+							<string>135pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -398,19 +357,19 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20506471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>詳細</string>
+								<string>Detail</string>
 							</dict>
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 154}, {580, 309}}</string>
+								<string>{{0, 140}, {580, 323}}</string>
 								<key>RubberWindowFrame</key>
 								<string>262 260 788 504 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>309pt</string>
+							<string>323pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -429,9 +388,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>D164183616F742F300377EA3</string>
+				<string>D1077C7818434AD8004ABB92</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>D164183716F742F300377EA3</string>
+				<string>D1077C7918434AD8004ABB92</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -617,7 +576,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>XCMainBuildResultsModuleGUID</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ビルド結果</string>
+								<string>Build Results</string>
 								<key>XCBuildResultsTrigger_Collapse</key>
 								<integer>1021</integer>
 								<key>XCBuildResultsTrigger_Open</key>
@@ -651,7 +610,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>D1F0452C15E8DE2300B418EF</string>
-				<string>D164183916F742F300377EA3</string>
+				<string>D1077C7A18434AD8004ABB92</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
