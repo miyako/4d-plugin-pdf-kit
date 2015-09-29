@@ -5,10 +5,13 @@ This 4D plugins allows an application to perform basic PDF manipulation on OS X.
 
 * Tested on El Capitan: ```YES```
 
-Remarks
+New in 1.2
 ---
 
-It seems like removePageAtIndex has a problem on El Capitan; the call is disabled on 10.11, for now.
+Passing 0 to ```PDF SET PAGE ROTATION``` will rotate all pages.
+
+Fixed El Capitan issue for ```PDF SET PAGE ROTATION``` and ```PDF REMOVE PAGE```. 
+
 
 **Document**
 
