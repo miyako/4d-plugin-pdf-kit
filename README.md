@@ -5,6 +5,11 @@ This 4D plugins allows an application to perform basic PDF manipulation on OS X.
 
 * Tested on El Capitan: ```YES```
 
+Remarks
+---
+
+It seems like removePageAtIndex has a problem on El Capitan; the call is disabled on 10.11, for now.
+
 **Document**
 
 ```
