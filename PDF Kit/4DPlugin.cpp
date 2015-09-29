@@ -64,11 +64,11 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 			break;
 
 		case 3 :
-			PDF_SET_PAGE_ROTATION(pResult, pParams);
+			PDF_SET_PAGE_ROTATION2(pResult, pParams);
 			break;
 
 		case 4 :
-			PDF_REMOVE_PAGE(pResult, pParams);
+			PDF_REMOVE_PAGE2(pResult, pParams);
 			break;
 
 		case 5 :
@@ -221,6 +221,132 @@ void PDF_SET_PAGE_ROTATION(sLONG_PTR *pResult, PackagePtr pParams)
 		[pdfData release];
 	}
 }
+
+#pragma mark Patches for El Capitan
+
+void PDF_SET_PAGE_ROTATION2(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB ParamData;
+	C_LONGINT ParamPageNumber;
+	C_LONGINT ParamRotation;
+	
+	ParamData.fromParamAtIndex(pParams, 1);
+	ParamPageNumber.fromParamAtIndex(pParams, 2);
+	ParamRotation.fromParamAtIndex(pParams, 3);
+    
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, ParamData.getBytesPtr(), ParamData.getBytesLength(), NULL);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(dataProvider);
+    
+    if(pdf)
+    {
+        unsigned int countPages = CGPDFDocumentGetNumberOfPages(pdf);
+        unsigned int pageNumber = ParamPageNumber.getIntValue();
+        unsigned int pageRotation = ParamRotation.getIntValue();
+        
+        if(pageNumber <= countPages){
+            
+            NSMutableData *mutableData = (NSMutableData *)CFDataCreateMutable(kCFAllocatorDefault, 0);
+            CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)mutableData);
+            CGContextRef ctx = CGPDFContextCreate(dataConsumer, NULL, NULL);
+            
+            if(ctx)
+            {
+                for(size_t i = 1; i <= countPages; ++i)
+                {
+                    PA_YieldAbsolute();
+                    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, i);
+                    
+                    if(page)
+                    {
+                        if((i == pageNumber) || (0 == pageNumber))
+                        {
+                        
+                            CGRect rect = CGPDFPageGetBoxRect(page, kCGPDFCropBox);
+                            rect = CGRectApplyAffineTransform(rect, CGAffineTransformMakeRotation(M_PI * pageRotation / 180.0f));
+                            CGContextBeginPage(ctx, &rect);
+                            CGContextRotateCTM(ctx, M_PI * pageRotation / 180.0f);
+                            CGContextDrawPDFPage(ctx, page);
+                            CGContextEndPage(ctx);
+                        }else
+                        {
+                            CGRect rect = CGPDFPageGetBoxRect(page, kCGPDFCropBox);
+                            CGContextBeginPage(ctx, &rect);
+                            CGContextDrawPDFPage(ctx, page);
+                            CGContextEndPage(ctx);
+                        }
+                    }
+                }
+
+                CGPDFContextClose(ctx);
+                CGContextRelease(ctx);
+                ParamData.setBytes((const uint8_t *)[mutableData bytes], [mutableData length]);
+                ParamData.toParamAtIndex(pParams, 1);
+
+            }
+
+            CGDataConsumerRelease(dataConsumer);
+            [mutableData release];
+            
+        }
+    }
+    
+    CGPDFDocumentRelease(pdf);
+    CGDataProviderRelease(dataProvider);
+}
+
+void PDF_REMOVE_PAGE2(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB ParamData;
+	C_LONGINT ParamPageNumber;
+    
+	ParamData.fromParamAtIndex(pParams, 1);
+	ParamPageNumber.fromParamAtIndex(pParams, 2);
+    
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, ParamData.getBytesPtr(), ParamData.getBytesLength(), NULL);
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(dataProvider);
+    
+    if(pdf)
+    {
+        unsigned int countPages = CGPDFDocumentGetNumberOfPages(pdf);
+        unsigned int pageNumber = ParamPageNumber.getIntValue();
+        
+        if((pageNumber > 0) && (pageNumber <= countPages)){
+        
+            NSMutableData *mutableData = (NSMutableData *)CFDataCreateMutable(kCFAllocatorDefault, 0);
+            CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)mutableData);
+            CGContextRef ctx = CGPDFContextCreate(dataConsumer, NULL, NULL);
+            
+            if(ctx)
+            {
+                for(size_t i = 1; i <= countPages; ++i)
+                {
+                    PA_YieldAbsolute();
+                    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, i);
+                    
+                    if(page)
+                    {
+                        if(i != pageNumber)
+                        {
+                            CGRect rect = CGPDFPageGetBoxRect(page, kCGPDFCropBox);
+                            CGContextBeginPage(ctx, &rect);
+                            CGContextDrawPDFPage(ctx, page);
+                            CGContextEndPage(ctx);
+                        }
+                    }
+                }
+                CGPDFContextClose(ctx);
+                CGContextRelease(ctx);
+                ParamData.setBytes((const uint8_t *)[mutableData bytes], [mutableData length]);
+                ParamData.toParamAtIndex(pParams, 1);
+            }
+        }
+    }
+
+    CGPDFDocumentRelease(pdf);
+    CGDataProviderRelease(dataProvider);
+}
+
+#pragma mark -
 
 void PDF_REMOVE_PAGE(sLONG_PTR *pResult, PackagePtr pParams)
 {

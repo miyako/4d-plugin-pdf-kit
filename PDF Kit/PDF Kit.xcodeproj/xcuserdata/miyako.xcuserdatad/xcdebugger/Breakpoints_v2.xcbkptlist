@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "4DPlugin.cpp"
-            timestampString = "465220711.348836"
+            timestampString = "465241315.487327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
+            startingLineNumber = "575"
+            endingLineNumber = "575"
             landmarkName = "PDF_Data_from_picture(sLONG_PTR *pResult, PackagePtr pParams)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "4DPlugin.cpp"
-            timestampString = "465219954.041786"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "PDF_REMOVE_PAGE(sLONG_PTR *pResult, PackagePtr pParams)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -19,6 +19,10 @@ void PDF_EXCHANGE_PAGES(sLONG_PTR *pResult, PackagePtr pParams);
 void PDF_INSERT_PAGES(sLONG_PTR *pResult, PackagePtr pParams);
 void PDF_GET_PAGE_ANNOTATION(sLONG_PTR *pResult, PackagePtr pParams);
 
+//El Capitan
+void PDF_SET_PAGE_ROTATION2(sLONG_PTR *pResult, PackagePtr pParams);
+void PDF_REMOVE_PAGE2(sLONG_PTR *pResult, PackagePtr pParams);
+
 // --- Picture
 void PDF_Data_from_picture(sLONG_PTR *pResult, PackagePtr pParams);
 
