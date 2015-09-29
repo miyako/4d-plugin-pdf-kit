@@ -242,13 +242,15 @@ void PDF_REMOVE_PAGE(sLONG_PTR *pResult, PackagePtr pParams)
 			unsigned int pageNumber = ParamPageNumber.getIntValue();
 			
 			if((pageNumber > 0) && (pageNumber <= countPages)){
-				
 				pageNumber--;//index is zero based
-				[pdf removePageAtIndex:pageNumber];
+                if (NSAppKitVersionNumber <= NSAppKitVersionNumber10_10_Max) {
+                    [pdf removePageAtIndex:pageNumber];
+                }else{
+                    //removePageAtIndex crash El Capitan
+                }
 				NSData *pdfDataModified = [pdf dataRepresentation];
 				ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
-				ParamData.toParamAtIndex(pParams, 1);				
-				
+				ParamData.toParamAtIndex(pParams, 1);
 			}
 			[pdf release];
 		}
