@@ -1,9 +1,13 @@
 4d-plugin-pdf-kit
 =================
 
-This 4D plugins allows an application to perform basic PDF manipulation on OS X.
+Perform basic PDF manipulation on OS X.
 
-* Tested on El Capitan: ```YES```
+##Platform
+
+| carbon | cocoa | win32 | win64 |
+|:------:|:-----:|:---------:|:---------:|
+|🆗|🆗|🚫|🚫|
 
 New in 1.2
 ---
