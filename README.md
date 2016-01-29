@@ -16,8 +16,37 @@ Passing 0 to ```PDF SET PAGE ROTATION``` will rotate all pages.
 
 Fixed El Capitan issue for ```PDF SET PAGE ROTATION``` and ```PDF REMOVE PAGE```. 
 
+Commands
+---
 
-**Document**
+```c
+// --- Page
+PDF_Count_pages
+PDF_GET_PAGE
+PDF_SET_PAGE_ROTATION
+PDF_REMOVE_PAGE
+PDF_EXCHANGE_PAGES
+PDF_INSERT_PAGES
+PDF_GET_PAGE_ANNOTATION
+
+//El Capitan
+PDF_SET_PAGE_ROTATION2
+PDF_REMOVE_PAGE2
+
+// --- Picture
+PDF_Data_from_picture
+
+// --- Document
+PDF_GET_DOCUMENT_ATTRIBUTES
+PDF_SET_DOCUMENT_ATTRIBUTES
+PDF_Get_ducument_version
+PDF_Get_document_text
+```
+
+Examples
+---
+
+* Document
 
 ```
 $filePath:=Get 4D folder(Current resources folder)+"sample.pdf"
@@ -39,7 +68,7 @@ $filePath:=System folder(Desktop)+"image_test.pdf"
 BLOB TO DOCUMENT($filePath;$pdfData)
 ```
 
-**pages**
+* pages
 
 ```
 $filePath:=Get 4D folder(Current resources folder)+"sample.pdf"
@@ -85,7 +114,7 @@ $filePath:=System folder(Desktop)+"insert_test.pdf"
 BLOB TO DOCUMENT($filePath;$pdfData)
 ```
 
-**atrributes**
+* atrributes
 
 ```
 $filePath:=Get 4D folder(Current resources folder)+"sample.pdf"
@@ -125,7 +154,7 @@ End if
 PDF SET DOCUMENT ATTRIBUTES ($pdfData;$keys;$values)
 ```
 
-**annotation**
+* annotation
 
 ```
 $filePath:=Get 4D folder(Current resources folder)+"sample_annotation.pdf"
