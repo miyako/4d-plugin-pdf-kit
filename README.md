@@ -9,38 +9,36 @@ Perform basic PDF manipulation on OS X.
 |:------:|:-----:|:---------:|:---------:|
 |🆗|🆗|🚫|🚫|
 
-New in 1.2
----
+##New in 1.2
 
 Passing 0 to ```PDF SET PAGE ROTATION``` will rotate all pages.
 
 Fixed El Capitan issue for ```PDF SET PAGE ROTATION``` and ```PDF REMOVE PAGE```. 
 
-Commands
----
+##Commands
 
 ```c
 // --- Page
-PDF_Count_pages
-PDF_GET_PAGE
-PDF_SET_PAGE_ROTATION
-PDF_REMOVE_PAGE
-PDF_EXCHANGE_PAGES
-PDF_INSERT_PAGES
-PDF_GET_PAGE_ANNOTATION
+PDF Count pages
+PDF GET PAGE
+PDF SET PAGE ROTATION
+PDF REMOVE PAGE
+PDF EXCHANGE PAGES
+PDF INSERT PAGES
+PDF GET PAGE ANNOTATION
 
 //El Capitan
-PDF_SET_PAGE_ROTATION2
-PDF_REMOVE_PAGE2
+PDF SET PAGE ROTATION2
+PDF REMOVE PAGE2
 
 // --- Picture
-PDF_Data_from_picture
+PDF Data from picture
 
 // --- Document
-PDF_GET_DOCUMENT_ATTRIBUTES
-PDF_SET_DOCUMENT_ATTRIBUTES
-PDF_Get_ducument_version
-PDF_Get_document_text
+PDF GET DOCUMENT ATTRIBUTES
+PDF SET DOCUMENT ATTRIBUTES
+PDF Get document version
+PDF Get document text
 ```
 
 Examples
