@@ -269,6 +269,23 @@ void PDF_GET_PAGE2(sLONG_PTR *pResult, PackagePtr pParams)
 				ParamPageData.setBytes((const uint8_t *)[mutableData bytes], [mutableData length]);
 				CGDataConsumerRelease(dataConsumer);
 				[mutableData release];
+				
+				NSData *pdfData = [[NSData alloc]initWithBytes:ParamPageData.getBytesPtr() length:ParamPageData.getBytesLength()];
+				
+				if(pdfData)
+				{
+					PDFDocument *pdfDocument = [[PDFDocument alloc]initWithData:pdfData];
+					if(pdfDocument)
+					{
+						pdfkit::retain(pdfDocument);
+						PDFPage *page = [pdfDocument pageAtIndex:0];
+						ParamString.setUTF16String([page string]);
+						ParamLabel.setUTF16String([page label]);
+						[pdfDocument release];
+					}
+					[pdfData release];
+				}
+				
 			}
 			CGPDFDocumentRelease(pdf);
 		}
