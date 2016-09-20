@@ -9,6 +9,13 @@ Perform basic PDF manipulation on OS X.
 |:------:|:-----:|:---------:|:---------:|
 |🆗|🆗|🚫|🚫|
 
+##New in 1.4
+
+* Removed the "retain" patch for earlier El Capitan crash problem. 
+* ``PDF REMOVE PAGE`` is restored to use original code.
+
+**Note**: Most page commands (insert, remove, exchange) will not work if a page is rotated. The plugin is not using PDF Kit to simply rotate a page, but rather, calling CGPDF to re-draw such pages on a rotated context. You should rotate the page at the very end.
+
 ##New in 1.2
 
 Passing 0 to ```PDF SET PAGE ROTATION``` will rotate all pages.
