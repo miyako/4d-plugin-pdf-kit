@@ -32,3 +32,6 @@ void PDF_GET_DOCUMENT_ATTRIBUTES(sLONG_PTR *pResult, PackagePtr pParams);
 void PDF_SET_DOCUMENT_ATTRIBUTES(sLONG_PTR *pResult, PackagePtr pParams);
 void PDF_Get_document_version(sLONG_PTR *pResult, PackagePtr pParams);
 void PDF_Get_document_text(sLONG_PTR *pResult, PackagePtr pParams);
+
+//Sierra
+void PDF_EXCHANGE_PAGES2(sLONG_PTR *pResult, PackagePtr pParams);

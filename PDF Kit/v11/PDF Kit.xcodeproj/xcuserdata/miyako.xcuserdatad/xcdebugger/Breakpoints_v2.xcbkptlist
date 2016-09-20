@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "350"
             endingLineNumber = "350"
-            landmarkName = "PDF_SET_PAGE_ROTATION2(sLONG_PTR *pResult, PackagePtr pParams)"
+            landmarkName = "PDF_GET_PAGE2(sLONG_PTR *pResult, PackagePtr pParams)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
