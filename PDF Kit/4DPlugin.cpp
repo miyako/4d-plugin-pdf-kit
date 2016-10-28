@@ -75,7 +75,7 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 			break;
 
 		case 4 :
-			PDF_REMOVE_PAGE(pResult, pParams);
+			PDF_REMOVE_PAGE2(pResult, pParams);
 			break;
 
 		case 5 :
@@ -837,41 +837,41 @@ void PDF_INSERT_PAGES(sLONG_PTR *pResult, PackagePtr pParams)
 	ParamData.toParamAtIndex(pParams, 1);
 }
 
-void PDF_REMOVE_PAGE(sLONG_PTR *pResult, PackagePtr pParams)
-{
-	C_BLOB ParamData;
-	C_LONGINT ParamPageNumber;
-	
-	ParamPageNumber.fromParamAtIndex(pParams, 2);
-	
-	PA_Handle h = *(PA_Handle *)(pParams[0]);
-	if(h)
-	{
-		NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
-		
-		if(pdfData)
-		{
-			PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
-			if(pdf)
-			{
-				unsigned int countPages = [pdf pageCount];
-				unsigned int pageNumber = ParamPageNumber.getIntValue();
-				if((pageNumber > 0) && (pageNumber <= countPages))
-				{
-					pageNumber--;//index is zero based
-					[pdf removePageAtIndex:pageNumber];
-					
-					NSData *pdfDataModified = [pdf dataRepresentation];
-					ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
-				}
-				[pdf release];
-			}//pdf
-			[pdfData release];
-		}//pdfData
-		PA_UnlockHandle(h);
-	}//h
-	ParamData.toParamAtIndex(pParams, 1);
-}
+//void PDF_REMOVE_PAGE(sLONG_PTR *pResult, PackagePtr pParams)
+//{
+//	C_BLOB ParamData;
+//	C_LONGINT ParamPageNumber;
+//	
+//	ParamPageNumber.fromParamAtIndex(pParams, 2);
+//	
+//	PA_Handle h = *(PA_Handle *)(pParams[0]);
+//	if(h)
+//	{
+//		NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+//		
+//		if(pdfData)
+//		{
+//			PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
+//			if(pdf)
+//			{
+//				unsigned int countPages = [pdf pageCount];
+//				unsigned int pageNumber = ParamPageNumber.getIntValue();
+//				if((pageNumber > 0) && (pageNumber <= countPages))
+//				{
+//					pageNumber--;//index is zero based
+//					[pdf removePageAtIndex:pageNumber];
+//					
+//					NSData *pdfDataModified = [pdf dataRepresentation];
+//					ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
+//				}
+//				[pdf release];
+//			}//pdf
+//			[pdfData release];
+//		}//pdfData
+//		PA_UnlockHandle(h);
+//	}//h
+//	ParamData.toParamAtIndex(pParams, 1);
+//}
 
 void PDF_Count_pages(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -987,6 +987,49 @@ void PDF_EXCHANGE_PAGES2(sLONG_PTR *pResult, PackagePtr pParams)
 					[pdf removePageAtIndex:lowerPage];
 					[pdf insertPage:[pdf pageAtIndex:higherPage] atIndex:lowerPage];
 					[pdf removePageAtIndex:higherPage+1];
+					
+					NSData *pdfDataModified = [pdf dataRepresentation];
+					ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
+				}
+				[pdf release];
+			}//pdf
+			[pdfData release];
+		}//pdfData
+		PA_UnlockHandle(h);
+	}//h
+	ParamData.toParamAtIndex(pParams, 1);
+}
+
+void PDF_REMOVE_PAGE2(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB ParamData;
+	C_LONGINT ParamPageNumber;
+	
+	ParamPageNumber.fromParamAtIndex(pParams, 2);
+	
+	PA_Handle h = *(PA_Handle *)(pParams[0]);
+	if(h)
+	{
+		NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+		
+		if(pdfData)
+		{
+			PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
+			if(pdf)
+			{
+				unsigned int countPages = [pdf pageCount];
+				unsigned int pageNumber = ParamPageNumber.getIntValue();
+				if((pageNumber > 0) && (pageNumber <= countPages))
+				{
+					pageNumber--;//index is zero based
+					countPages--;//index is zero based
+					
+					[pdf insertPage:[pdf pageAtIndex:pageNumber] atIndex:countPages];
+					[pdf removePageAtIndex:pageNumber];
+					[pdf insertPage:[pdf pageAtIndex:countPages] atIndex:pageNumber];
+					[pdf removePageAtIndex:countPages+1];
+					[pdf removePageAtIndex:countPages];
+					[pdf insertPage:[pdf pageAtIndex:pageNumber] atIndex:countPages];
 					
 					NSData *pdfDataModified = [pdf dataRepresentation];
 					ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
