@@ -9,6 +9,10 @@ Perform basic PDF manipulation on OS X.
 |:------:|:-----:|:---------:|:---------:|
 |🆗|🆗|🚫|🚫|
 
+##Fix for Sierra
+
+* ``PDF REMOVE PAGE`` is rewritten to internally exchange the target page before removing it. 
+
 ##New in 1.4
 
 * Removed the "retain" patch for earlier El Capitan crash problem. 
