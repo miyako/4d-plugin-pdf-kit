@@ -1021,15 +1021,12 @@ void PDF_REMOVE_PAGE2(sLONG_PTR *pResult, PackagePtr pParams)
 				unsigned int pageNumber = ParamPageNumber.getIntValue();
 				if((pageNumber > 0) && (pageNumber <= countPages))
 				{
-					pageNumber--;//index is zero based
-					countPages--;//index is zero based
-					
-					[pdf insertPage:[pdf pageAtIndex:pageNumber] atIndex:countPages];
-					[pdf removePageAtIndex:pageNumber];
-					[pdf insertPage:[pdf pageAtIndex:countPages] atIndex:pageNumber];
-					[pdf removePageAtIndex:countPages+1];
-					[pdf removePageAtIndex:countPages];
-					[pdf insertPage:[pdf pageAtIndex:pageNumber] atIndex:countPages];
+					for(unsigned int i = pageNumber; i < countPages;++i)
+					{
+						[pdf insertPage:[pdf pageAtIndex:i] atIndex:i-1];
+						[pdf removePageAtIndex:i];
+					}
+					[pdf removePageAtIndex:--countPages];
 					
 					NSData *pdfDataModified = [pdf dataRepresentation];
 					ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
