@@ -11,6 +11,8 @@ Perform basic PDF manipulation on OS X.
 
 ##Fix for Sierra
 
+* ``PDF INSERT PAGES`` is rewritten to internally duplicate trailing pages before inserting new pages then finally remove the duplicate pages.  
+
 * ``PDF REMOVE PAGE`` is rewritten to internally exchange the target page before removing it. 
 
 ##New in 1.4
