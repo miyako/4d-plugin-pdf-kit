@@ -35,3 +35,4 @@ void PDF_Get_document_text(sLONG_PTR *pResult, PackagePtr pParams);
 //Sierra
 void PDF_EXCHANGE_PAGES2(sLONG_PTR *pResult, PackagePtr pParams);
 void PDF_REMOVE_PAGE2(sLONG_PTR *pResult, PackagePtr pParams);
+void PDF_INSERT_PAGES2(sLONG_PTR *pResult, PackagePtr pParams);

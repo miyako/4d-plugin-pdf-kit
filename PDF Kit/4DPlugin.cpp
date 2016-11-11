@@ -83,7 +83,7 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 			break;
 
 		case 6 :
-			PDF_INSERT_PAGES(pResult, pParams);
+			PDF_INSERT_PAGES2(pResult, pParams);
 			break;
 
 		case 7 :
@@ -780,62 +780,62 @@ void PDF_GET_PAGE_ANNOTATION(sLONG_PTR *pResult, PackagePtr pParams)
 	ParamContents.toParamAtIndex(pParams, 6);
 }
 
-void PDF_INSERT_PAGES(sLONG_PTR *pResult, PackagePtr pParams)
-{
-	C_BLOB ParamData;
-	C_LONGINT ParamPageNumber;
-	C_BLOB ParamDataToInsert;
-	
-	ParamPageNumber.fromParamAtIndex(pParams, 2);
-	ParamDataToInsert.fromParamAtIndex(pParams, 3);
-	
-	PA_Handle h = *(PA_Handle *)(pParams[0]);
-	if(h)
-	{
-		NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
-		
-		if(pdfData)
-		{
-			PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
-			
-			if(pdf)
-			{
-				unsigned int countPages = [pdf pageCount];
-				unsigned int pageNumber = ParamPageNumber.getIntValue();
-				
-				if((pageNumber > 0) && (pageNumber <= countPages))
-				{
-					pageNumber--;
-					NSData *pdfDataToInsert = [[NSData alloc]initWithBytes:ParamDataToInsert.getBytesPtr() length:ParamDataToInsert.getBytesLength()];
-					
-					if(pdfDataToInsert)
-					{
-						PDFDocument *pdfToInsert = [[PDFDocument alloc]initWithData:pdfDataToInsert];
-						
-						if(pdfToInsert)
-						{
-							for(unsigned int i = 0;i < [pdfToInsert pageCount]; ++i)
-							{
-								[pdf insertPage:[pdfToInsert pageAtIndex:i] atIndex:pageNumber];
-								pageNumber++;
-							}
-							
-							NSData *pdfDataModified = [pdf dataRepresentation];
-							ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
-							
-							[pdfToInsert release];
-						}
-						[pdfDataToInsert release];
-					}
-				}
-				[pdf release];
-			}//pdf
-			[pdfData release];
-		}//pdfData
-		PA_UnlockHandle(h);
-	}//h
-	ParamData.toParamAtIndex(pParams, 1);
-}
+//void PDF_INSERT_PAGES(sLONG_PTR *pResult, PackagePtr pParams)
+//{
+//	C_BLOB ParamData;
+//	C_LONGINT ParamPageNumber;
+//	C_BLOB ParamDataToInsert;
+//	
+//	ParamPageNumber.fromParamAtIndex(pParams, 2);
+//	ParamDataToInsert.fromParamAtIndex(pParams, 3);
+//	
+//	PA_Handle h = *(PA_Handle *)(pParams[0]);
+//	if(h)
+//	{
+//		NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+//		
+//		if(pdfData)
+//		{
+//			PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
+//			
+//			if(pdf)
+//			{
+//				unsigned int countPages = [pdf pageCount];
+//				unsigned int pageNumber = ParamPageNumber.getIntValue();
+//				
+//				if((pageNumber > 0) && (pageNumber <= countPages))
+//				{
+//					pageNumber--;
+//					NSData *pdfDataToInsert = [[NSData alloc]initWithBytes:ParamDataToInsert.getBytesPtr() length:ParamDataToInsert.getBytesLength()];
+//					
+//					if(pdfDataToInsert)
+//					{
+//						PDFDocument *pdfToInsert = [[PDFDocument alloc]initWithData:pdfDataToInsert];
+//						
+//						if(pdfToInsert)
+//						{
+//							for(unsigned int i = 0;i < [pdfToInsert pageCount]; ++i)
+//							{
+//								[pdf insertPage:[pdfToInsert pageAtIndex:i] atIndex:pageNumber];
+//								pageNumber++;
+//							}
+//							
+//							NSData *pdfDataModified = [pdf dataRepresentation];
+//							ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
+//							
+//							[pdfToInsert release];
+//						}
+//						[pdfDataToInsert release];
+//					}
+//				}
+//				[pdf release];
+//			}//pdf
+//			[pdfData release];
+//		}//pdfData
+//		PA_UnlockHandle(h);
+//	}//h
+//	ParamData.toParamAtIndex(pParams, 1);
+//}
 
 //void PDF_REMOVE_PAGE(sLONG_PTR *pResult, PackagePtr pParams)
 //{
@@ -1030,6 +1030,74 @@ void PDF_REMOVE_PAGE2(sLONG_PTR *pResult, PackagePtr pParams)
 					
 					NSData *pdfDataModified = [pdf dataRepresentation];
 					ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
+				}
+				[pdf release];
+			}//pdf
+			[pdfData release];
+		}//pdfData
+		PA_UnlockHandle(h);
+	}//h
+	ParamData.toParamAtIndex(pParams, 1);
+}
+
+void PDF_INSERT_PAGES2(sLONG_PTR *pResult, PackagePtr pParams)
+{
+	C_BLOB ParamData;
+	C_LONGINT ParamPageNumber;
+	C_BLOB ParamDataToInsert;
+	
+	ParamPageNumber.fromParamAtIndex(pParams, 2);
+	ParamDataToInsert.fromParamAtIndex(pParams, 3);
+	
+	PA_Handle h = *(PA_Handle *)(pParams[0]);
+	if(h)
+	{
+		NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+		
+		if(pdfData)
+		{
+			PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
+			
+			if(pdf)
+			{
+				unsigned int countPages = [pdf pageCount];
+				unsigned int pageNumber = ParamPageNumber.getIntValue();
+				
+				if((pageNumber > 0) && (pageNumber <= countPages))
+				{
+					pageNumber--;
+					NSData *pdfDataToInsert = [[NSData alloc]initWithBytes:ParamDataToInsert.getBytesPtr() length:ParamDataToInsert.getBytesLength()];
+					
+					if(pdfDataToInsert)
+					{
+						PDFDocument *pdfToInsert = [[PDFDocument alloc]initWithData:pdfDataToInsert];
+						
+						if(pdfToInsert)
+						{
+							NSUInteger lastPageIndex = countPages;
+							NSUInteger numberOfPagesToDelete = countPages-pageNumber;
+							countPages--;
+							for(unsigned int i = countPages;i >= pageNumber; --i)
+							{
+								[pdf insertPage:[pdf pageAtIndex:i] atIndex:countPages];
+							}
+							for(unsigned int i = 0;i < [pdfToInsert pageCount]; ++i)
+							{
+								[pdf insertPage:[pdfToInsert pageAtIndex:i] atIndex:pageNumber];
+								pageNumber++;
+							}
+							for(unsigned int i = 0;i < numberOfPagesToDelete; ++i)
+							{
+								[pdf removePageAtIndex:lastPageIndex];
+							}
+							
+							NSData *pdfDataModified = [pdf dataRepresentation];
+							ParamData.setBytes((const uint8_t *)[pdfDataModified bytes], [pdfDataModified length]);
+							
+							[pdfToInsert release];
+						}
+						[pdfDataToInsert release];
+					}
 				}
 				[pdf release];
 			}//pdf
