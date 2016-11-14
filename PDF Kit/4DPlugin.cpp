@@ -1076,19 +1076,23 @@ void PDF_INSERT_PAGES2(sLONG_PTR *pResult, PackagePtr pParams)
 						{
 							NSUInteger lastPageIndex = countPages;
 							NSUInteger numberOfPagesToDelete = countPages-pageNumber;
+                            NSUInteger pageNumberToDelete = lastPageIndex + ([pdfToInsert pageCount]) -1;
 							countPages--;
-							for(unsigned int i = countPages;i >= pageNumber; --i)
+							for(signed int i = lastPageIndex;i > pageNumber; --i)
 							{
-								[pdf insertPage:[pdf pageAtIndex:i] atIndex:countPages];
+								[pdf insertPage:[pdf pageAtIndex:i-1] atIndex:countPages];
+//                                NSLog(@"insertPage:%i atIndex:%i", i-1, countPages);
 							}
 							for(unsigned int i = 0;i < [pdfToInsert pageCount]; ++i)
 							{
 								[pdf insertPage:[pdfToInsert pageAtIndex:i] atIndex:pageNumber];
 								pageNumber++;
 							}
+                            
 							for(unsigned int i = 0;i < numberOfPagesToDelete; ++i)
 							{
-								[pdf removePageAtIndex:lastPageIndex];
+								[pdf removePageAtIndex:pageNumberToDelete];
+//                                NSLog(@"removePageAtIndex:%i", (unsigned int)pageNumberToDelete);
 							}
 							
 							NSData *pdfDataModified = [pdf dataRepresentation];
