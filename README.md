@@ -13,49 +13,6 @@ Perform basic PDF manipulation on OS X.
 
 <img src="https://cloud.githubusercontent.com/assets/1725068/18940649/21945000-8645-11e6-86ed-4a0f800e5a73.png" width="32" height="32" /> <img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" />
 
-* ``PDF INSERT PAGES`` is rewritten to internally duplicate trailing pages before inserting new pages then finally remove the duplicate pages.  
-
-* ``PDF REMOVE PAGE`` is rewritten to internally exchange the target page before removing it. 
-
-## New in 1.4
-
-* Removed the "retain" patch for earlier El Capitan crash problem. 
-* ``PDF REMOVE PAGE`` is restored to use original code.
-
-**Note**: Most page commands (insert, remove, exchange) will not work if a page is rotated. The plugin is not using PDF Kit to simply rotate a page, but rather, calling CGPDF to re-draw such pages on a rotated context. You should rotate the page at the very end.
-
-## New in 1.2
-
-Passing 0 to ```PDF SET PAGE ROTATION``` will rotate all pages.
-
-Fixed El Capitan issue for ```PDF SET PAGE ROTATION``` and ```PDF REMOVE PAGE```. 
-
-##Commands
-
-```c
-// --- Page
-PDF Count pages
-PDF GET PAGE
-PDF SET PAGE ROTATION
-PDF REMOVE PAGE
-PDF EXCHANGE PAGES
-PDF INSERT PAGES
-PDF GET PAGE ANNOTATION
-
-//El Capitan
-PDF SET PAGE ROTATION2
-PDF REMOVE PAGE2
-
-// --- Picture
-PDF Data from picture
-
-// --- Document
-PDF GET DOCUMENT ATTRIBUTES
-PDF SET DOCUMENT ATTRIBUTES
-PDF Get document version
-PDF Get document text
-```
-
 Examples
 ---
 
