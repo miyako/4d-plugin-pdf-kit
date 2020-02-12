@@ -12,6 +12,8 @@ Basic PDF manipulation using [PDFKit](https://developer.apple.com/documentation/
 
 <img width="32" height="32" src="https://user-images.githubusercontent.com/1725068/73986501-15964580-4981-11ea-9ac1-73c5cee50aae.png"> <img src="https://user-images.githubusercontent.com/1725068/73987971-db2ea780-4984-11ea-8ada-e25fb9c3cf4e.png" width="32" height="32" />
 
+**Note**: the Core Graphics patches (``PDF_GET_PAGE`` ``PDF_SET_PAGE_ROTATION``) are still preserved, but the El Capitan PDF Kit patches (``PDF_EXCHANGE_PAGES`` ``PDF_REMOVE_PAGE`` ``PDF_INSERT_PAGES``) are now removed. this may introduce a regression. also, the ``PDFDocument`` and ``PDFPage`` release code (El Capitan PDF Kit patch) is kept, which may result in memory leak. all depends on how PDF Kit has been fixed (or not) with the latest macOS release. **use with caution**.
+
 Examples
 ---
 
