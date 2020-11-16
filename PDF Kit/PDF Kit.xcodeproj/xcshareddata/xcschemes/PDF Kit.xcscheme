@@ -29,6 +29,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Deployment"
@@ -45,6 +47,17 @@
          BundleIdentifier = "com.4d.4d"
          FilePath = "/Applications/4D v17 R6/4D.app">
       </PathRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8D01CCC60486CAD60068D4B7"
+            BuildableName = "PDF Kit.bundle"
+            BlueprintName = "PDF Kit"
+            ReferencedContainer = "container:PDF Kit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Deployment"

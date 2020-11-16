@@ -15,6 +15,7 @@
 		18B684FF06944F8800CC6A1E /* 4DPlugin-PDF-Kit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18B684FE06944F8800CC6A1E /* 4DPlugin-PDF-Kit.cpp */; };
 		8D01CCCA0486CAD60068D4B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		D120937F13534DCC00A72CAA /* 4DPlugin-PDF-Kit.h in Headers */ = {isa = PBXBuildFile; fileRef = D120937E13534DCC00A72CAA /* 4DPlugin-PDF-Kit.h */; };
+		D1235646256346CF00E193EC /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1235645256346CF00E193EC /* Quartz.framework */; };
 		D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D130064E12F02D9700702C0E /* Cocoa.framework */; };
 		D13116A91A03ACB700DE1322 /* 4DPluginAPI.c in Sources */ = {isa = PBXBuildFile; fileRef = D13116A81A03ACB700DE1322 /* 4DPluginAPI.c */; settings = {COMPILER_FLAGS = "-Wno-multichar"; }; };
 		D134D4AC1A030BA0008D14EF /* manifest.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = D134D4A91A030B06008D14EF /* manifest.json */; };
@@ -25,7 +26,6 @@
 		D19BD8CE23F0DEE80002EA4C /* C_BLOB.h in Headers */ = {isa = PBXBuildFile; fileRef = D19BD8C723F0DEE80002EA4C /* C_BLOB.h */; };
 		D19BD8CF23F0DEE80002EA4C /* C_LONGINT.h in Headers */ = {isa = PBXBuildFile; fileRef = D19BD8C823F0DEE80002EA4C /* C_LONGINT.h */; };
 		D19BD8D023F0DEE80002EA4C /* C_TEXT.h in Headers */ = {isa = PBXBuildFile; fileRef = D19BD8C923F0DEE80002EA4C /* C_TEXT.h */; };
-		D19BD8D223F0DF9D0002EA4C /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19BD8D123F0DF9D0002EA4C /* PDFKit.framework */; };
 		D19BD8D523F0E4330002EA4C /* ARRAY_TEXT.h in Headers */ = {isa = PBXBuildFile; fileRef = D19BD8D323F0E4330002EA4C /* ARRAY_TEXT.h */; };
 		D19BD8D623F0E4330002EA4C /* ARRAY_TEXT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D19BD8D423F0E4330002EA4C /* ARRAY_TEXT.cpp */; };
 /* End PBXBuildFile section */
@@ -54,6 +54,7 @@
 		18B684FE06944F8800CC6A1E /* 4DPlugin-PDF-Kit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 30; path = "4DPlugin-PDF-Kit.cpp"; sourceTree = "<group>"; };
 		8D01CCD10486CAD60068D4B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D120937E13534DCC00A72CAA /* 4DPlugin-PDF-Kit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "4DPlugin-PDF-Kit.h"; sourceTree = "<group>"; };
+		D1235645256346CF00E193EC /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		D130064E12F02D9700702C0E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		D13116A81A03ACB700DE1322 /* 4DPluginAPI.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = 4DPluginAPI.c; sourceTree = "<group>"; };
 		D134D4A91A030B06008D14EF /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		D19BD8C723F0DEE80002EA4C /* C_BLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_BLOB.h; path = "4D Plugin API/Classes/C_BLOB.h"; sourceTree = "<group>"; };
 		D19BD8C823F0DEE80002EA4C /* C_LONGINT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_LONGINT.h; path = "4D Plugin API/Classes/C_LONGINT.h"; sourceTree = "<group>"; };
 		D19BD8C923F0DEE80002EA4C /* C_TEXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_TEXT.h; path = "4D Plugin API/Classes/C_TEXT.h"; sourceTree = "<group>"; };
-		D19BD8D123F0DF9D0002EA4C /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		D19BD8D323F0E4330002EA4C /* ARRAY_TEXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARRAY_TEXT.h; path = "4D Plugin API/Classes/ARRAY_TEXT.h"; sourceTree = "<group>"; };
 		D19BD8D423F0E4330002EA4C /* ARRAY_TEXT.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ARRAY_TEXT.cpp; path = "4D Plugin API/Classes/ARRAY_TEXT.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D19BD8D223F0DF9D0002EA4C /* PDFKit.framework in Frameworks */,
+				D1235646256346CF00E193EC /* Quartz.framework in Frameworks */,
 				D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +165,7 @@
 		D16FBB3C22A4C07E008F0416 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D19BD8D123F0DF9D0002EA4C /* PDFKit.framework */,
+				D1235645256346CF00E193EC /* Quartz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -283,7 +283,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test \"$CONFIGURATION\" == 'Deployment'; then\n    USER_NAME=keisuke.miyako@4d.com\n    UUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\n    DEVELOPER_ID=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\n    PRODUCT_PATH=\"$CODESIGNING_FOLDER_PATH\"\n    xattr -cr \"$PRODUCT_PATH\"\n    codesign --remove-signature \"$PRODUCT_PATH\"\n    codesign --verbose --deep --timestamp --force --sign \"$DEVELOPER_ID\" \"$PRODUCT_PATH\"\n    DMG_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.dmg\"\n    ZIP_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.zip\"\n    rm \"$DMG_PATH\"\n    hdiutil create -format UDBZ -plist -srcfolder \"$PRODUCT_PATH\" \"$DMG_PATH\"\n    echo \"xcrun stapler staple \\\"$PRODUCT_PATH\\\"\"\n    echo \"hdiutil create -format UDBZ -plist -srcfolder  \\\"$PRODUCT_PATH\\\" \\\"$DMG_PATH\\\" \"\n    echo \"ditto -c -k --keepParent \\\"$PRODUCT_PATH\\\" \\\"$ZIP_PATH\\\" \"\n    xcrun altool --notarize-app --file \"$DMG_PATH\" --username \"$USER_NAME\" --password \"@keychain:altool\" --primary-bundle-id $PRODUCT_BUNDLE_IDENTIFIER.$UUID\n    echo \"spctl -a -vv -t install \\\"$PRODUCT_PATH\\\" \"\n    rm -f \"$ZIP_PATH\"\n    rm -f \"$DMG_PATH\"\nelse\n    echo \"No notarization performed as this is not a release build.\"\nfi\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
