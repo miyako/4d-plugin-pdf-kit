@@ -1,0 +1,41 @@
+{
+	"themes": [
+		{
+			"theme": "PDF Document Attributes",
+			"constants": [
+                {
+                    "name": "PDF_TITLE",
+                    "value": "PDF_TITLE:S"
+                },
+                {
+                    "name": "PDF_AUTHOR",
+                    "value": "PDF_AUTHOR:S"
+                },
+                {
+                    "name": "PDF_SUBJECT",
+                    "value": "PDF_SUBJECT:S"
+                },
+                {
+                    "name": "PDF_CREATOR",
+                    "value": "PDF_CREATOR:S"
+                },
+                {
+                    "name": "PDF_PRODUCER",
+                    "value": "PDF_PRODUCER:S"
+                },
+                {
+                    "name": "PDF_KEYWORDS",
+                    "value": "PDF_KEYWORDS:S"
+                },
+                {
+                    "name": "PDF_CREATION_DATE",
+                    "value": "PDF_CREATION_DATE:S"
+                },
+                {
+                    "name": "PDF_MODIFICATION_DATE",
+                    "value": "PDF_MODIFICATION_DATE:S"
+                }
+            ]
+        }
+	]
+}
