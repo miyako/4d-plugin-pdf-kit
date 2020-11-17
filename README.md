@@ -14,6 +14,10 @@ Basic PDF manipulation using [PDFKit](https://developer.apple.com/documentation/
 
 **Note**: the Core Graphics patches (``PDF_GET_PAGE`` ``PDF_SET_PAGE_ROTATION``) are still preserved, but the El Capitan PDF Kit patches (``PDF_EXCHANGE_PAGES`` ``PDF_REMOVE_PAGE`` ``PDF_INSERT_PAGES``) are now removed. this may introduce a regression. also, the ``PDFDocument`` and ``PDFPage`` retain code (El Capitan PDF Kit patch) is used, which may result in memory leaks. all depends on how PDF Kit has been fixed (or not) with the latest macOS release. **use with caution**.
 
+The `master` branch contains old version. `10.13` is the main branch.
+
+Link to Quartz framework on Mojave. Link to PDFKit on Catalina.
+
 Examples
 ---
 
