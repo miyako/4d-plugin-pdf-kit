@@ -18,20 +18,20 @@
 
 //https://developer.apple.com/library/mac/releasenotes/AppKit/RN-AppKit/
 
-namespace pdfkit {
-    void retain(PDFDocument *document) {
-        if (NSAppKitVersionNumber > NSAppKitVersionNumber10_10_Max)
-        {
-            [document retain];
-        }
-    }
-    void retain(PDFPage *page) {
-        if (NSAppKitVersionNumber > NSAppKitVersionNumber10_10_Max)
-        {
-            [page retain];
-        }
-    }
-}
+//namespace pdfkit {
+//    void retain(PDFDocument *document) {
+//        if (NSAppKitVersionNumber > NSAppKitVersionNumber10_10_Max)
+//        {
+//            [document retain];
+//        }
+//    }
+//    void retain(PDFPage *page) {
+//        if (NSAppKitVersionNumber > NSAppKitVersionNumber10_10_Max)
+//        {
+//            [page retain];
+//        }
+//    }
+//}
 
 #pragma mark -
 
@@ -139,7 +139,7 @@ void PDF_GET_PAGE(PA_PluginParameters params) {
         PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
         
         if(pdf){
-            pdfkit::retain(pdf);
+//            pdfkit::retain(pdf);
             NSUInteger countPages = [pdf pageCount];
             unsigned int pageNumber = ParamPageNumber.getIntValue();
             
@@ -185,7 +185,7 @@ void PDF_SET_PAGE_ROTATION(PA_PluginParameters params) {
         PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
         
         if(pdf){
-            pdfkit::retain(pdf);
+//            pdfkit::retain(pdf);
             NSUInteger countPages = [pdf pageCount];
             unsigned int pageNumber = ParamPageNumber.getIntValue();
             unsigned int pageRotation = ParamRotation.getIntValue();
@@ -268,7 +268,7 @@ void PDF_EXCHANGE_PAGES(PA_PluginParameters params) {
         PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
         
         if(pdf){
-            pdfkit::retain(pdf);
+//            pdfkit::retain(pdf);
             NSUInteger countPages = [pdf pageCount];
             unsigned int pageNumberA = ParamPageNumberA.getIntValue();
             unsigned int pageNumberB = ParamPageNumberB.getIntValue();
@@ -938,7 +938,6 @@ void PDF_INSERT_PAGES2(PA_PluginParameters params) {
 
 void PDF_GET_PAGE2(PA_PluginParameters params) {
     
-//    sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
     PackagePtr pParams = (PackagePtr)params->fParameters;
     
     C_LONGINT ParamPageNumber;
@@ -955,39 +954,41 @@ void PDF_GET_PAGE2(PA_PluginParameters params) {
         
         if(dataProvider)
         {
-            CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(dataProvider);
-            if(pdf)
-            {
-                unsigned int pageNumber = ParamPageNumber.getIntValue();
-                size_t countPages = CGPDFDocumentGetNumberOfPages(pdf);
-                if(pageNumber <= countPages)
+            @autoreleasepool {
+                CGPDFDocumentRef pdf = CGPDFDocumentCreateWithProvider(dataProvider);
+                if(pdf)
                 {
-                    CGPDFPageRef page = CGPDFDocumentGetPage(pdf, pageNumber);
-                    NSMutableData *mutableData = (NSMutableData *)CFDataCreateMutable(kCFAllocatorDefault, 0);
-                    CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)mutableData);
-                    CGContextRef ctx = CGPDFContextCreate(dataConsumer, NULL, NULL);
-                    
-                    CGRect rect = CGPDFPageGetBoxRect(page, kCGPDFCropBox);
-                    CGContextBeginPage(ctx, &rect);
-                    CGContextDrawPDFPage(ctx, page);
-                    CGContextEndPage(ctx);
-                    CGPDFContextClose(ctx);
-                    CGContextRelease(ctx);
-                    
-                    PDFDocument *pdfDocument = [[PDFDocument alloc]initWithData:mutableData];
-                    if(pdfDocument)
+                    unsigned int pageNumber = ParamPageNumber.getIntValue();
+                    size_t countPages = CGPDFDocumentGetNumberOfPages(pdf);
+                    if(pageNumber <= countPages)
                     {
-                        PDFPage *page = [pdfDocument pageAtIndex:0];
-                        ParamString.setUTF16String([page string]);
-                        ParamLabel.setUTF16String([page label]);
-                        [pdfDocument release];
+                        CGPDFPageRef page = CGPDFDocumentGetPage(pdf, pageNumber);
+                        NSMutableData *mutableData = (NSMutableData *)CFDataCreateMutable(kCFAllocatorDefault, 0);
+                        CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((CFMutableDataRef)mutableData);
+                        CGContextRef ctx = CGPDFContextCreate(dataConsumer, NULL, NULL);
+                        
+                        CGRect rect = CGPDFPageGetBoxRect(page, kCGPDFCropBox);
+                        CGContextBeginPage(ctx, &rect);
+                        CGContextDrawPDFPage(ctx, page);
+                        CGContextEndPage(ctx);
+                        CGPDFContextClose(ctx);
+                        CGContextRelease(ctx);
+                        
+                        PDFDocument *pdfDocument = [[PDFDocument alloc]initWithData:mutableData];
+                        if(pdfDocument)
+                        {
+                            PDFPage *page = [pdfDocument pageAtIndex:0];
+                            ParamString.setUTF16String([page string]);
+                            ParamLabel.setUTF16String([page label]);
+                            [pdfDocument release];
+                        }
+                        
+                        ParamPageData.setBytes((const uint8_t *)[mutableData bytes], (unsigned int)[mutableData length]);
+                        CGDataConsumerRelease(dataConsumer);
+                        [mutableData release];
                     }
-                    
-                    ParamPageData.setBytes((const uint8_t *)[mutableData bytes], (unsigned int)[mutableData length]);
-                    CGDataConsumerRelease(dataConsumer);
-                    [mutableData release];
+                    CGPDFDocumentRelease(pdf);
                 }
-                CGPDFDocumentRelease(pdf);
             }
             CGDataProviderRelease(dataProvider);
         }
