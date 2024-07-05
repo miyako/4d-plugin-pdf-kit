@@ -1,3 +1,4 @@
 *.DS_Store
 *.suo
 PDF Kit/build/*
+PDF Kit/test/userPreferences.*
