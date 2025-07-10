@@ -8,32 +8,6 @@
 
 Perform basic PDF manipulation on macOS.
 
-##Commands
-
-```4d
-// --- Page
-PDF Count pages
-PDF GET PAGE
-PDF SET PAGE ROTATION
-PDF REMOVE PAGE
-PDF EXCHANGE PAGES
-PDF INSERT PAGES
-PDF GET PAGE ANNOTATION
-
-//El Capitan
-PDF SET PAGE ROTATION2
-PDF REMOVE PAGE2
-
-// --- Picture
-PDF Data from picture
-
-// --- Document
-PDF GET DOCUMENT ATTRIBUTES
-PDF SET DOCUMENT ATTRIBUTES
-PDF Get document version
-PDF Get document text
-```
-
 ### Examples
 
 * Document
