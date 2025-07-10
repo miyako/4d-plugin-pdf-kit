@@ -1,4 +1,4 @@
-![version](https://img.shields.io/badge/version-16%2B-8331AE)
+![version](https://img.shields.io/badge/version-20%2B-E23089)
 ![platform](https://img.shields.io/static/v1?label=platform&message=mac-intel%20|%20mac-arm&color=blue)
 [![license](https://img.shields.io/github/license/miyako/4d-plugin-pdf-kit)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-plugin-pdf-kit/total)
@@ -6,28 +6,11 @@
 4d-plugin-pdf-kit
 =================
 
-Perform basic PDF manipulation on OS X.
-
-* ``PDF INSERT PAGES`` is rewritten to internally duplicate trailing pages before inserting new pages then finally remove the duplicate pages.  
-
-* ``PDF REMOVE PAGE`` is rewritten to internally exchange the target page before removing it. 
-
-## New in 1.4
-
-* Removed the "retain" patch for earlier El Capitan crash problem. 
-* ``PDF REMOVE PAGE`` is restored to use original code.
-
-**Note**: Most page commands (insert, remove, exchange) will not work if a page is rotated. The plugin is not using PDF Kit to simply rotate a page, but rather, calling CGPDF to re-draw such pages on a rotated context. You should rotate the page at the very end.
-
-## New in 1.2
-
-Passing 0 to ```PDF SET PAGE ROTATION``` will rotate all pages.
-
-Fixed El Capitan issue for ```PDF SET PAGE ROTATION``` and ```PDF REMOVE PAGE```. 
+Perform basic PDF manipulation on macOS.
 
 ##Commands
 
-```c
+```4d
 // --- Page
 PDF Count pages
 PDF GET PAGE
@@ -51,12 +34,11 @@ PDF Get document version
 PDF Get document text
 ```
 
-Examples
----
+### Examples
 
 * Document
 
-```
+```4d
 $filePath:=Get 4D folder(Current resources folder)+"sample.pdf"
 DOCUMENT TO BLOB($filePath;$pdfData)
 
@@ -78,7 +60,7 @@ BLOB TO DOCUMENT($filePath;$pdfData)
 
 * pages
 
-```
+```4d
 $filePath:=Get 4D folder(Current resources folder)+"sample.pdf"
 DOCUMENT TO BLOB($filePath;$pdfData)
 
@@ -124,7 +106,7 @@ BLOB TO DOCUMENT($filePath;$pdfData)
 
 * atrributes
 
-```
+```4d
 $filePath:=Get 4D folder(Current resources folder)+"sample.pdf"
 DOCUMENT TO BLOB($filePath;$pdfData)
 
@@ -164,7 +146,7 @@ PDF SET DOCUMENT ATTRIBUTES ($pdfData;$keys;$values)
 
 * annotation
 
-```
+```4d
 $filePath:=Get 4D folder(Current resources folder)+"sample_annotation.pdf"
 DOCUMENT TO BLOB($filePath;$pdfData)
 
