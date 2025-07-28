@@ -300,12 +300,7 @@ static void PDF_INSERT_PAGES(PA_PluginParameters params) {
                             {
                                 for(unsigned int i = 0;i < [pdfToInsert pageCount]; ++i)
                                 {
-//                                    [pdf insertPage:[pdfToInsert pageAtIndex:i] atIndex:pageNumber];
-                                    
-                            PDFPage *pageCopy = [[PDFPage alloc]initWithData:[[pdfToInsert pageAtIndex:i] dataRepresentation]];
-                            [pdf insertPage:pageCopy atIndex:pageNumber];
-                            [pageCopy release];
-                                    
+                                    [pdf insertPage:[pdfToInsert pageAtIndex:i] atIndex:pageNumber];
                                     pageNumber++;
                                 }
                                 
