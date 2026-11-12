@@ -63,6 +63,8 @@ extern "C" {
 		
 		C_TEXT();
 		~C_TEXT();
+		C_TEXT(const C_TEXT&) = delete;
+		C_TEXT& operator=(const C_TEXT&) = delete;
 		
 	};
 	

@@ -7,6 +7,8 @@
  */
 
 #include "ARRAY_TEXT.h"
+#include <stdexcept>
+#include <string>
 
 void ARRAY_TEXT::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 {	
@@ -58,8 +60,13 @@ void ARRAY_TEXT::toParamAtIndex(PackagePtr pParams, uint32_t index)
 		
 		if(arr.fType == eVK_ArrayUnicode)
 		{
+			if(!arr.uValue.fArray.fData)
+				throw std::runtime_error("ARRAY_TEXT: null array storage");
 			
 			PA_ResizeArray(&arr, this->_CUTF16StringArray->empty() ? 0 : (uint32_t)(this->_CUTF16StringArray->size() - 1));
+			PA_ErrorCode error = PA_GetLastError();
+			if(error != eER_NoErr)
+				throw std::runtime_error("ARRAY_TEXT resize: " + std::to_string(error));
 			
 			uint32_t i;
 			

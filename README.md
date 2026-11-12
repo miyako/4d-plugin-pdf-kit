@@ -8,6 +8,13 @@
 
 Perform basic PDF manipulation on macOS.
 
+### Ownership regression
+
+The [synthetic ownership audit](tests/ownership/README.md) documents bundled
+SDK contracts, reachability, baseline/fixed evidence and platform limitations.
+Run `python3 tests/ownership/run.py` on macOS to validate actual sources without
+invoking the signing, packaging or notarization project phases.
+
 ### Examples
 
 * Document
