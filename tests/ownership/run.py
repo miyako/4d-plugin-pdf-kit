@@ -9,7 +9,7 @@ import tempfile
 
 root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
 here = Path(__file__).resolve().parent
-plugin = root / "PDF Kit"
+plugin = root
 sources = [
     "4D Plugin API/4DPluginAPI.c",
     "4D Plugin API/Classes/C_TEXT.cpp",

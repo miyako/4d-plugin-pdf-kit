@@ -17,8 +17,8 @@ ASan on the unfixed baseline. It is not an expected failure on fixed sources.
 ## Inventory and reachability
 
 The complete native source inventory is the engine implementation
-`PDF Kit/4D Plugin API/4DPluginAPI.c`, the four `Classes/*.cpp` wrappers,
-`PDF Kit/4DPlugin-PDF-Kit.cpp`, and `PDF Kit/support/4DPlugin-JSON.cpp`.
+`4D Plugin API/4DPluginAPI.c`, the four `Classes/*.cpp` wrappers,
+`4DPlugin-PDF-Kit.cpp`, and `support/4DPlugin-JSON.cpp`.
 The harness compiles all seven, with their actual headers. No source body or
 SDK function is extracted or replaced; only host engine entry points and
 external Apple boundaries are synthetic.
@@ -56,7 +56,7 @@ empty fallbacks on failure. Error behavior of those Apple APIs is not proven.
 The header's `v14` label is not an upstream release identity. The baseline
 engine source and ABI blobs below remain unchanged:
 
-| File in `PDF Kit/4D Plugin API/` | Git blob |
+| File in `4D Plugin API/` | Git blob |
 |---|---|
 | `4DPluginAPI.c` | `62f745e91d81ef2c3c901c656ea8e175d3b173e8` |
 | `4DPluginAPI.h` | `528bf1d2552df08d6a8b1bc95011a9b72934ad5c` |

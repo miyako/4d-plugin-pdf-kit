@@ -1,4 +1,10 @@
 *.DS_Store
 *.suo
-PDF Kit/build/*
-PDF Kit/test/userPreferences.*
+build/
+test/userPreferences.*
+test/Logs/
+test/Project/DerivedData/
+/PDF Kit.dmg
+/PDF Kit.zip
+test/Plugins/PDF Kit.bundle/Contents/MacOS/PDF Kit
+test/Plugins/PDF Kit.bundle/Contents/_CodeSignature/
