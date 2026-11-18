@@ -581,8 +581,9 @@ int main(int argc, char** argv) {
         auto label = make(reinterpret_cast<const PA_Unichar*>(u"stale"));
         auto content = make(reinterpret_cast<const PA_Unichar*>(u"stale"));
         dispatch(2, {&h, &page, &out, &label, &content});
-        check(strings.at(content.fString) == text(value) && label.fLength == 0,
-              "dispatcher page scalar exact content and baseline label behavior");
+        check(strings.at(content.fString) == text(value) &&
+              strings.at(label.fString) == text(@"label"),
+              "dispatcher page scalar exact content and label behavior");
         PA_DisposeHandle(out); dispose(label); dispose(content);
         for (int cmd : {11, 12}) {
             auto s = make(reinterpret_cast<const PA_Unichar*>(u"stale"));

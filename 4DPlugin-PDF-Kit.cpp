@@ -16,6 +16,7 @@ void PluginMain(PA_long32 selector, PA_PluginParameters params) {
     
 	try
 	{
+        @autoreleasepool {
         switch(selector)
         {
 			// --- PDF Kit
@@ -58,6 +59,7 @@ void PluginMain(PA_long32 selector, PA_PluginParameters params) {
 				break;
 
         }
+        }
 
 	}
 	catch(...)
@@ -79,6 +81,7 @@ static void PDF_Count_pages(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
@@ -90,7 +93,6 @@ static void PDF_Count_pages(PA_PluginParameters params) {
             }//pdf
             [pdfData release];
         }//pdfData
-        PA_UnlockHandle(h);
     }//h
     returnValue.setReturn(pResult);
 }
@@ -123,7 +125,7 @@ static void PDF_GET_PAGE(PA_PluginParameters params) {
                 
                 pageNumber--;//index is zero based
                 PDFPage *page = [pdf pageAtIndex:pageNumber];
-                ParamString.setUTF16String([page label]);
+                ParamLabel.setUTF16String([page label]);
                 ParamString.setUTF16String([page string]);
                 NSData *pdfPageData = [page dataRepresentation];
                 ParamPageData.setBytes((const uint8_t *)[pdfPageData bytes], (unsigned int)[pdfPageData length]);
@@ -199,6 +201,7 @@ static void PDF_REMOVE_PAGE(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
@@ -219,7 +222,6 @@ static void PDF_REMOVE_PAGE(PA_PluginParameters params) {
                 }//pdf
             [pdfData release];
         }//pdfData
-        PA_UnlockHandle(h);
     }//h
     ParamData.toParamAtIndex(pParams, 1);
 }
@@ -246,7 +248,7 @@ static void PDF_EXCHANGE_PAGES(PA_PluginParameters params) {
                 unsigned int pageNumberA = ParamPageNumberA.getIntValue();
                 unsigned int pageNumberB = ParamPageNumberB.getIntValue();
                 
-                if((pageNumberA <= countPages) && (pageNumberB <= countPages) && (pageNumberA != pageNumberB)){
+                if((pageNumberA > 0) && (pageNumberB > 0) && (pageNumberA <= countPages) && (pageNumberB <= countPages) && (pageNumberA != pageNumberB)){
                     
                     pageNumberA--;//index is zero based
                     pageNumberB--;//index is zero based
@@ -278,6 +280,7 @@ static void PDF_INSERT_PAGES(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
@@ -316,7 +319,6 @@ static void PDF_INSERT_PAGES(PA_PluginParameters params) {
                 }//pdf
             [pdfData release];
         }//pdfData
-        PA_UnlockHandle(h);
     }//h
     ParamData.toParamAtIndex(pParams, 1);
 }
@@ -342,6 +344,7 @@ static void PDF_GET_PAGE_ANNOTATION(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
@@ -367,7 +370,8 @@ static void PDF_GET_PAGE_ANNOTATION(PA_PluginParameters params) {
                             ParamCoordinates.appendUTF16String(coordinatesString);
                             [coordinatesString release];
                             
-                            ParamColors.appendUTF16String([[annotation color]description]);
+                            NSColor *annotationColor = [annotation color];
+                            ParamColors.appendUTF16String(annotationColor ? [annotationColor description] : @"");
                             
                             if([[annotation class]isSubclassOfClass:[PDFAnnotationInk class]])
                             {
@@ -394,7 +398,7 @@ static void PDF_GET_PAGE_ANNOTATION(PA_PluginParameters params) {
                                                 [pathString appendFormat:@"C %f %f %f %f %f %f ", points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y];
                                                 break;
                                             case NSClosePathBezierPathElement:
-                                                [pathString appendFormat:@"Z %f %f ", points[0].x, points[0].y];
+                                                [pathString appendString:@"Z "];
                                                 break;
                                             default:
                                                 break;
@@ -408,7 +412,8 @@ static void PDF_GET_PAGE_ANNOTATION(PA_PluginParameters params) {
                             }
                             
                             if(([[annotation class]isSubclassOfClass:[PDFAnnotationText class]]) || ([[annotation class]isSubclassOfClass:[PDFAnnotationFreeText class]])){
-                                ParamContents.appendUTF16String([annotation contents]);
+                                NSString *annotationContents = [annotation contents];
+                                ParamContents.appendUTF16String(annotationContents ? annotationContents : @"");
                                 continue;
                             }
                             
@@ -422,20 +427,23 @@ static void PDF_GET_PAGE_ANNOTATION(PA_PluginParameters params) {
                             }
                             
                             if(([[annotation class]isSubclassOfClass:[PDFAnnotationLink class]])){
-                                NSString *linkString;
+                                NSString *linkString = nil;
                                 PDFDestination *destination = [(PDFAnnotationLink *)annotation destination];
                                 NSURL *url = [(PDFAnnotationLink *)annotation URL];
+                                PDFPage *destPage = destination ? [destination page] : nil;
+                                NSString *destLabel = destPage ? [destPage label] : nil;
                                 if(url){
                                     linkString = [url absoluteString];
-                                }else{
-                                    linkString = [NSString stringWithFormat:@"%@ (%f %f)", [[destination page]label], [destination point].x, [destination point].y];
+                                }else if(destLabel){
+                                    linkString = [NSString stringWithFormat:@"%@ (%f %f)", destLabel, [destination point].x, [destination point].y];
                                 }
-                                ParamContents.appendUTF16String(linkString);
+                                ParamContents.appendUTF16String(linkString ? linkString : @"");
                                 continue;
                             }
-                            
+
                             if([[annotation class]isSubclassOfClass:[PDFAnnotationStamp class]]){
-                                ParamContents.appendUTF16String([(PDFAnnotationStamp *)annotation name]);
+                                NSString *stampName = [(PDFAnnotationStamp *)annotation name];
+                                ParamContents.appendUTF16String(stampName ? stampName : @"");
                                 continue;
                             }
                             ParamContents.appendUTF16String(@"");
@@ -447,7 +455,6 @@ static void PDF_GET_PAGE_ANNOTATION(PA_PluginParameters params) {
             
             [pdfData release];
         }
-        PA_UnlockHandle(h);
     }//h
 
     ParamTypes.toParamAtIndex(pParams, 3);
@@ -500,6 +507,7 @@ static void PDF_GET_DOCUMENT_ATTRIBUTES(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
@@ -562,7 +570,6 @@ static void PDF_GET_DOCUMENT_ATTRIBUTES(PA_PluginParameters params) {
             
             [pdfData release];
         }
-        PA_UnlockHandle(h);
     }//h
     
     ParamKeys.toParamAtIndex(pParams, 2);
@@ -584,13 +591,15 @@ static void PDF_SET_DOCUMENT_ATTRIBUTES(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
                 PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
                 if(pdf)
                 {
-                    NSMutableDictionary *attributes = [[NSMutableDictionary alloc]initWithDictionary:[pdf documentAttributes]];
+                    NSDictionary *existingAttributes = [pdf documentAttributes];
+                    NSMutableDictionary *attributes = existingAttributes ? [[NSMutableDictionary alloc]initWithDictionary:existingAttributes] : [[NSMutableDictionary alloc]init];
                     
                     NSArray *documentAttributes = [NSArray arrayWithObjects:
                                                                                  @"PDF_TITLE", @"PDF_AUTHOR",
@@ -608,7 +617,13 @@ static void PDF_SET_DOCUMENT_ATTRIBUTES(PA_PluginParameters params) {
                             
                             NSString *k = [[NSString alloc]initWithUTF8String:(const char *)key.c_str()];
                             NSString *v = [[NSString alloc]initWithUTF8String:(const char *)value.c_str()];
-                            
+
+                            if(!k || !v){
+                                [k release];
+                                [v release];
+                                continue;
+                            }
+
                             NSDate *dateFromString = [NSDate dateWithString:v];
                             
                             switch ([documentAttributes indexOfObject:k])
@@ -662,7 +677,6 @@ static void PDF_SET_DOCUMENT_ATTRIBUTES(PA_PluginParameters params) {
             
             [pdfData release];
         }
-        PA_UnlockHandle(h);
     }
     ParamData.toParamAtIndex(pParams, 1);
 
@@ -680,6 +694,7 @@ static void PDF_Get_document_version(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         
         if(pdfData)
         {
@@ -691,7 +706,6 @@ static void PDF_Get_document_version(PA_PluginParameters params) {
                 }//pdf
             [pdfData release];
         }//pdfData
-        PA_UnlockHandle(h);
     }//h
     returnValue.setReturn(pResult);
 }
@@ -707,6 +721,7 @@ static void PDF_Get_document_text(PA_PluginParameters params) {
     if(h)
     {
         NSData *pdfData = [[NSData alloc]initWithBytes:(const void *)PA_LockHandle(h) length:PA_GetHandleSize(h)];
+        PA_UnlockHandle(h);
         if(pdfData)
         {
                 PDFDocument *pdf = [[PDFDocument alloc]initWithData:pdfData];
@@ -717,7 +732,6 @@ static void PDF_Get_document_text(PA_PluginParameters params) {
                 }//pdf
             [pdfData release];
         }//pdfData
-        PA_UnlockHandle(h);
     }//h
     returnValue.setReturn(pResult);
 }

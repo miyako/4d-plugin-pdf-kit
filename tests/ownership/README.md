@@ -40,8 +40,9 @@ consumes independent snapshots of borrowed array strings. Selectors 2, 11 and
 selectors manipulate in-memory blobs or accept a borrowed picture. Every
 selector is executed by the real dispatcher against synthetic data. Annotation
 fixtures cover text, free text, ink, line, link, stamp and generic branches;
-the ink path list is empty. The page-label assignment bug is deliberately
-preserved and asserted, not repaired as part of ownership work.
+the ink path list is empty. The page-label assignment bug asserted by the
+baseline harness was repaired after the audit: `PDF GET PAGE` now returns the
+page label in its fourth parameter.
 
 There are no plugin callbacks, retained callback variables, collection-element
 consumers, field setters or direct method-result consumers beyond the dormant
